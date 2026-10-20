@@ -1,7 +1,14 @@
 <?php
 // src/classes/MaterialBiblioteca.php
+    require_once __DIR__ . '/Prestable.php';
+    require_once __DIR__ . '/traits/TieneFechas.php';
+    require_once __DIR__ . '/traits/Loggable.php';
 
-class MaterialBiblioteca {
+    class MaterialBiblioteca implements Prestable {
+
+    use TieneFechas;
+    use Loggable;
+
     private int $id;
     private string $titulo;
     private string $autor;
@@ -48,4 +55,13 @@ class MaterialBiblioteca {
         if ($this->anio === null) return 0;
         return (int)date('Y') - $this->anio;
     }
+
+    public function prestar(): bool {
+    if (!$this->disponible) return false;
+    $this->disponible = false;
+    return true;
+    }
+
+    public function devolver(): void { $this->disponible = true; }
+    public function diasPrestamo(): int { return 15; }  
 }

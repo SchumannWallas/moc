@@ -17,4 +17,5 @@ class DVD extends MaterialBiblioteca {
     public function mostrarFicha(): string {
         return parent::mostrarFicha() . ' · ' . $this->duracionMin . ' min';
     }
+    public function diasPrestamo(): int { return 3; }
 }
