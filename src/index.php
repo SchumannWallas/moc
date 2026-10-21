@@ -14,10 +14,8 @@ require __DIR__ . '/includes/header.php';
 <?php foreach ($materiales as $m): ?>
   <li>
     <?= htmlspecialchars($m->mostrarFicha()) ?>
-    — <?= $m->isDisponible() ? '✅ Disponible' : '❌ Prestado' ?>
-    <?php if ($m->isDisponible()): ?>
-      · <a href="/material.php?id=<?= $m->getId() ?>">Ver ficha</a>
-    <?php endif; ?>
+    — <?= $m->isDisponible() ? '✅ Disponible' : '❌ Prestado' ?>    
+      · <a href="/material.php?id=<?= $m->getId() ?>">Ver ficha</a>    
   </li>
 <?php endforeach; ?>
 </ul>

@@ -31,6 +31,12 @@ require __DIR__ . '/includes/header.php';
     <input type="hidden" name="material_id" value="<?= $material->getId() ?>">
     <button>Pedir prestado</button>
   </form>
+  <?php else: ?>
+    <form method="POST" action="devolver.php">
+      <input type="hidden" name="material_id" value="<?= $material->getId() ?>">
+      <button>Devolver</button>
+    </form>
+
 <?php endif; ?>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>
