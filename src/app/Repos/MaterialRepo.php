@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
-require_once __DIR__ . '/../clases/Libro.php';
-require_once __DIR__ . '/../clases/Revista.php';
-require_once __DIR__ . '/../clases/DVD.php';
+require_once __DIR__ . '/../Config/db.php';
+require_once __DIR__ . '/../Classes/Libro.php';
+require_once __DIR__ . '/../Classes/Revista.php';
+require_once __DIR__ . '/../Classes/DVD.php';
 
 class MaterialRepo {
 

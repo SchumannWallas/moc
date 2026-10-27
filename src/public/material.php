@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/../app/Includes/auth.php';
 requireLogin();
-require_once __DIR__ . '/repos/MaterialRepo.php';
+require_once __DIR__ . '/../app/Repos/MaterialRepo.php';
 
 $id = (int)($_GET['id'] ?? 0);
 $repo = new MaterialRepo();
@@ -12,7 +12,7 @@ if (!$material) {
     exit('Material no encontrado');
 }
 
-require __DIR__ . '/includes/header.php';
+require __DIR__ . '/../app/Includes/header.php';
 ?>
 <h1><?= htmlspecialchars($material->mostrarFicha()) ?></h1>
 
@@ -39,4 +39,4 @@ require __DIR__ . '/includes/header.php';
 
 <?php endif; ?>
 
-<?php require __DIR__ . '/includes/footer.php'; ?>
+<?php require __DIR__ . '/../app/Includes/footer.php'; ?>

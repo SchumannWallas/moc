@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/../app/Includes/auth.php';
 requireLogin();
-require_once __DIR__ . '/repos/MaterialRepo.php';
+require_once __DIR__ . '/../app/Repos/MaterialRepo.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
@@ -17,10 +17,10 @@ if (!$material) {
     exit('Material no encontrado');
 }
 
-if ($material->prestar()) {
-    $repo->setDisponible($id, false);
-    $repo->registrarPrestamo($id, currentUser()['id']);
-    $material->log("Préstamo de '{$material->getTitulo()}' a " . currentUser()['email']);
+if (!$material->isDisponible()) {
+    $material->devolver();
+    $repo->setDisponible($id, true);
+    $material->log("Devolución de '{$material->getTitulo()}' por " . currentUser()['email']);
 }
 
 header('Location: material.php?id=' . $id);

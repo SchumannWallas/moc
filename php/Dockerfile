@@ -10,3 +10,4 @@ WORKDIR /var/www/HTML
 
 RUN echo "display_errors = On" > /usr/local/etc/php/conf.d/custom.ini \
     && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/custom.ini
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
