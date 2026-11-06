@@ -1,7 +1,12 @@
 <?php
+declare(strict_types=1);
+
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/Includes/auth.php';
-requireLogin();
-require_once __DIR__ . '/../app/Repos/MaterialRepo.php';
+
+use App\Repos\MaterialRepo;
+
+requireLogin();;
 
 $repo = new MaterialRepo();
 $materiales = $repo->findAll();
