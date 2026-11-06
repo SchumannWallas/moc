@@ -1,15 +1,25 @@
 <?php
+declare(strict_types=1);
+
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/Includes/auth.php';
+
+use App\Exceptions\MaterialNoEncontradoException;
+use App\Repos\MaterialRepo;
+
 requireLogin();
-require_once __DIR__ . '/../app/Repos/MaterialRepo.php';
 
 $id = (int)($_GET['id'] ?? 0);
-$repo = new MaterialRepo();
-$material = $repo->findById($id);
+
+try {
+    $repo = new MaterialRepo();
+    $material = $repo->findById($id);
+} catch (MaterialNoEncontradoException $e) {
 
 if (!$material) {
     http_response_code(404);
     exit('Material no encontrado');
+}
 }
 
 require __DIR__ . '/../app/Includes/header.php';

@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1);
+
+namespace App\Classes;
 trait Loggable {
     public function log(string $mensaje): void {
         error_log(sprintf('[%s] %s: %s',
