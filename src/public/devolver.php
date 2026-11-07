@@ -1,29 +1,29 @@
 <?php
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../app/Includes/auth.php';
+require_once __DIR__ . '/../app/Includes/exceptions.php';
+
+use App\Exceptions\MaterialNoEncontradoException;
+use App\Repos\MaterialRepo;
+use App\Services\PrestamoService;
+
 requireLogin();
-require_once __DIR__ . '/../app/Repos/MaterialRepo.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: index.php');
+    header('Location: /index.php');
     exit;
 }
 
 $id = (int)($_POST['material_id'] ?? 0);
-$repo = new MaterialRepo();
-$material = $repo->findById($id);
 
-if (!$material) {
+try {
+    (new PrestamoService(new MaterialRepo()))->devolver($id);
+} catch (MaterialNoEncontradoException $e) {
     http_response_code(404);
     exit('Material no encontrado');
 }
 
-if (!$material->isDisponible()) {
-    $material->devolver();
-    $repo->setDisponible($id, true);
-    $material->log("Devolución de '{$material->getTitulo()}' por " . currentUser()['email']);
-}
-
-header('Location: material.php?id=' . $id);
+header('Location: /material.php?id=' . $id);
 exit;

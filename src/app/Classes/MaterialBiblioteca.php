@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 namespace App\Classes;
+    use App\Classes\Traits\TieneFechas;
+    use App\Classes\Traits\Loggable;
 
     class MaterialBiblioteca implements Prestable {
-
     use TieneFechas;
     use Loggable;
-
     private int $id;
     private string $titulo;
     private string $autor;

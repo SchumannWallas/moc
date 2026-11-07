@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../app/Includes/auth.php';
+require_once __DIR__ . '/../app/Includes/exceptions.php';
 
 logout();
 header('Location: login.php');

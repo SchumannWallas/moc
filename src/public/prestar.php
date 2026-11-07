@@ -1,8 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../app/Includes/auth.php';
+require_once __DIR__ . '/../app/Includes/exceptions.php';
 
 use App\Exceptions\MaterialNoDisponibleException;
 use App\Exceptions\MaterialNoEncontradoException;
@@ -24,7 +25,6 @@ try {
 
     header('Location: /material.php?id=' . $id);
     exit;
-
 } catch (MaterialNoEncontradoException $e) {
     http_response_code(404);
     $error = $e->getMessage();

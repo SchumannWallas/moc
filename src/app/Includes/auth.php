@@ -1,5 +1,8 @@
 <?php
-// includes/auth.php — VERSIÓN REAL (sustituye al stub del Bloque 1)
+
+declare(strict_types=1);
+
+use function App\Config\db;
 
 session_set_cookie_params([
     'httponly' => true,
@@ -8,9 +11,9 @@ session_set_cookie_params([
 ]);
 session_start();
 
-require_once __DIR__ . '/../Config/db.php';
 
-function login(string $email, string $pass): bool {
+function login(string $email, string $pass): bool
+{
     $stmt = db()->prepare('SELECT id, email, password_hash, rol FROM usuarios WHERE email = ?');
     $stmt->execute([$email]);
     $u = $stmt->fetch();
@@ -27,18 +30,21 @@ function login(string $email, string $pass): bool {
     return false;
 }
 
-function currentUser(): ?array {
+function currentUser(): ?array
+{
     return $_SESSION['user'] ?? null;
 }
 
-function requireLogin(): void {
+function requireLogin(): void
+{
     if (!currentUser()) {
         header('Location: login.php');
         exit;
     }
 }
 
-function requireAdmin(): void {
+function requireAdmin(): void
+{
     requireLogin();
     if (currentUser()['rol'] !== 'admin') {
         http_response_code(403);
@@ -46,12 +52,20 @@ function requireAdmin(): void {
     }
 }
 
-function logout(): void {
+function logout(): void
+{
     $_SESSION = [];
     if (ini_get('session.use_cookies')) {
         $p = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 42000,
-                  $p['path'], $p['domain'], $p['secure'], $p['httponly']);
+        setcookie(
+            session_name(),
+            '',
+            time() - 42000,
+            $p['path'],
+            $p['domain'],
+            $p['secure'],
+            $p['httponly']
+        );
     }
     session_destroy();
 }
