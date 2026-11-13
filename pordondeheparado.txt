@@ -1,0 +1,3 @@
+excepeciones
+
+hacerlo en clase git rm -r --cached vendor

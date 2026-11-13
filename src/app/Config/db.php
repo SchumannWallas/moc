@@ -1,10 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Config;
+
+use PDOException;
 use PDO;
 
-function db(): PDO {
+function db(): PDO
+{
     static $pdo = null;
     if ($pdo === null) {
         $dsn = 'mysql:host=mariadb;dbname=lamp_db;charset=utf8mb4';
